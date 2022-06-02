@@ -21,7 +21,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-lg bg-indigo-50  flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-4 h-screen">
+      <div className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-lg bg-gray-50  flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-4 md:h-screen">
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap  flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler desktop*/}
 
@@ -35,7 +35,7 @@ const Sidebar = () => {
           <div className=" md:hidden">
             <button
               type="button"
-              onClick={() => setCollapseShow("bg-indigo-200 m-2 py-3 px-6")}
+              onClick={() => setCollapseShow("bg-gray-50 m-2 py-3 px-6")}
               className="rounded-md p-1 inline-flex items-center justify-center text-black "
             >
               <span className="sr-only">Open menu</span>
@@ -55,7 +55,7 @@ const Sidebar = () => {
                   <Link
                     exact="true"
                     to="/"
-                    className="flex-shrink-0 flex items-center grow text-center text-2xl text-indigo-600  py-2 font-bold rounded-md "
+                    className="flex-shrink-0 flex items-center grow text-center text-4xl text-indigo-600  py-2 font-bold rounded-md "
                   >
                     Apna Mart
                   </Link>
@@ -134,7 +134,7 @@ const Sidebar = () => {
                   <p className="text-base leading-4  ">Account Settings</p>
                 </Link>
               </div>
-              <div className="mt-36 flex  bg-indigo-500 rounded-md shadow-md  justify-between space-x-2 items-center h-full py-4 md:px-2 px-4 w-full  ">
+              <div className=" flex  bg-indigo-500 rounded-md shadow-md  justify-between space-x-2 items-center h-full py-4 md:px-3 px-4 w-full  ">
                 <div className="flex items-center">
                   {userContext.profileImageUrl === "" ? (
                     <img

@@ -3,6 +3,7 @@ import Main from "../layout/Main";
 import { ChatIcon, CartIcon, MoneyIcon, PeopleIcon } from "../assets/icons";
 import RoundIcon from "../components/RoundIcon";
 import InfoCard from "../components/card/InfoCard";
+
 const Dashboard = () => {
   return (
     <>
