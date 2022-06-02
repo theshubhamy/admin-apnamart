@@ -8,7 +8,9 @@ import Sidebar from "./components/Sidebar";
 //pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Signin = lazy(() => import("./auth/Signin"));
-const OtpVerification = lazy(() => import("./auth/OtpVerification"));
+const SigninOtpVerification = lazy(() =>
+  import("./auth/SigninOtpVerification")
+);
 const NotFound = lazy(() => import("./pages/NotFound"));
 const App = () => {
   const authContext = useContext(AuthContext);
@@ -53,14 +55,20 @@ const App = () => {
           }
         ></Route>
         <Route
-          path="/auth/otp-verification"
-          element={<OtpVerification />}
+          path="/auth/signin/otp-verification"
+          element={
+            !isSignedin ? (
+              <SigninOtpVerification />
+            ) : (
+              <Navigate to="/" replace="true" />
+            )
+          }
         ></Route>
       </Routes>
 
       {/* tost */}
       <ToastContainer
-        position="top-right"
+        position="top-center"
         autoClose={2000}
         hideProgressBar={false}
         newestOnTop

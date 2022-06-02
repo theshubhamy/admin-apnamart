@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import { LockClosedIcon } from "@heroicons/react/solid";
-import AuthContext from "../store/authContext";
-import UserContext from "../store/userContext";
+import { useNavigate } from "react-router-dom";
 import apnaMart from "../api/apnaMart";
 import { toast } from "react-toastify";
+import UserContext from "../store/userContext";
 const Signin = () => {
-  const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
   const userContext = useContext(UserContext);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -26,15 +26,9 @@ const Signin = () => {
           }
         );
         if (response.status === 201) {
-          let expirationTime = new Date();
-          expirationTime.setDate(expirationTime.getDate() + 1);
-          authContext.login(response.data.token, expirationTime.toISOString());
-          userContext.userDetails(
-            response.data.name,
-            response.data.email,
-            response.data.phone,
-            response.data.profileImageUrl
-          );
+          toast(response.data.msg);
+          navigate("../auth/signin/otp-verification", { replace: true });
+          userContext.setEmail(email);
         } else {
           toast.error(response.msg);
         }

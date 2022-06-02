@@ -4,6 +4,9 @@ const userContext = React.createContext({
   email: "",
   phone: "",
   profileImageUrl: "",
+  setEmail: () => {},
+  setName: () => {},
+  setPhone: () => {},
   userDetails: () => {},
 });
 const retrieveStoredData = () => {
@@ -39,7 +42,18 @@ export const UserContextProvider = (props) => {
   const [profileImageUrl, setProfileImageUrl] = useState(
     initialProfileImageUrl
   );
-
+  const userEmailHandler = (email) => {
+    setEmail(email);
+    localStorage.setItem("email", email);
+  };
+  const userPhoneHandler = (phone) => {
+    setPhone(phone);
+    localStorage.setItem("phone", phone);
+  };
+  const userNameHandler = (name) => {
+    setName(name);
+    localStorage.setItem("name", name);
+  };
   const userDetailsHandler = (name, email, phone, profileImageUrl) => {
     setName(name);
     localStorage.setItem("name", name);
@@ -55,6 +69,9 @@ export const UserContextProvider = (props) => {
     email: email,
     phone: phone,
     profileImageUrl: profileImageUrl,
+    setEmail: userEmailHandler,
+    setName: userNameHandler,
+    setPhone: userPhoneHandler,
     userDetails: userDetailsHandler,
   };
   return (
