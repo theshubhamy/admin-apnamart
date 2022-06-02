@@ -59,7 +59,7 @@ const Signin = () => {
                   id="email-address"
                   name="email"
                   type="email"
-                  autoComplete="email"
+                  autoComplete="off"
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
                   required
@@ -78,7 +78,7 @@ const Signin = () => {
                   value={password}
                   onChange={(e) => setpassword(e.target.value)}
                   required
-                  autoComplete="current-password"
+                  autoComplete="off"
                   className="appearance-none  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />

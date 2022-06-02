@@ -67,6 +67,7 @@ const Signup = () => {
                   id="name"
                   name="name"
                   type="text"
+                  autoComplete="off"
                   value={name}
                   onChange={(e) => setname(e.target.value)}
                   required
@@ -82,6 +83,7 @@ const Signup = () => {
                   id="email"
                   name="email"
                   type="email"
+                  autoComplete="off"
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
                   required
