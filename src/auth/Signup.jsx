@@ -50,16 +50,15 @@ const Signup = () => {
                 Already have an Account ?
               </span>
               <Link
-                exact="true"
                 to="/auth/Signin"
-                className="font-semibold text-red-500 text-xl hover:text-indigo-500"
+                className="font-semibold text-indigo-500 text-xl hover:text-indigo-500"
               >
                 Sign in
               </Link>
             </div>
           </div>
           <form className=" space-y-6" onSubmit={signUpHandler}>
-            <div className="rounded-md shadow-sm ">
+            <div className="rounded-md  ">
               <div className="">
                 <label htmlFor="name" className=" text-lg font-semibold">
                   Name
@@ -98,6 +97,7 @@ const Signup = () => {
                   id="phone"
                   name="phone"
                   type="tel"
+                  autoComplete="off"
                   value={phone}
                   onChange={(e) => setphone(e.target.value)}
                   required
@@ -116,6 +116,7 @@ const Signup = () => {
                   value={password}
                   onChange={(e) => setpassword(e.target.value)}
                   required
+                  autoComplete="off"
                   className="rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder=" Enter Password"
                 />
@@ -126,11 +127,7 @@ const Signup = () => {
               <div className="flex items-center">
                 <span className="ml-2 block text-sm text-gray-900">
                   by Sign up, you agree the{" "}
-                  <Link
-                    exact
-                    className="hover:underline"
-                    to="/termsandconditions"
-                  >
+                  <Link className="hover:underline text-indigo-600" to="/">
                     Terms and Conditions.{" "}
                   </Link>
                 </span>
@@ -138,7 +135,7 @@ const Signup = () => {
             </div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-xl font-semibold rounded-md text-white bg-gray-600 hover:bg-indigo-400 hover:text-black "
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-xl font-semibold rounded-md text-white bg-indigo-400 hover:bg-indigo-500  focus:bg-indigo-500 hover:text-black "
             >
               Sign up
             </button>
