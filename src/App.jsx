@@ -11,6 +11,10 @@ const Signin = lazy(() => import("./auth/Signin"));
 const SigninOtpVerification = lazy(() =>
   import("./auth/SigninOtpVerification")
 );
+const Signup = lazy(() => import("./auth/Signup"));
+const SignupOtpVerification = lazy(() =>
+  import("./auth/SignupOtpVerification")
+);
 const NotFound = lazy(() => import("./pages/NotFound"));
 const App = () => {
   const authContext = useContext(AuthContext);
@@ -59,6 +63,22 @@ const App = () => {
           element={
             !isSignedin ? (
               <SigninOtpVerification />
+            ) : (
+              <Navigate to="/" replace="true" />
+            )
+          }
+        ></Route>
+        <Route
+          path="/auth/signup"
+          element={
+            !isSignedin ? <Signup /> : <Navigate to="/" replace="true" />
+          }
+        ></Route>
+        <Route
+          path="/auth/signup/otp-verification"
+          element={
+            !isSignedin ? (
+              <SignupOtpVerification />
             ) : (
               <Navigate to="/" replace="true" />
             )
