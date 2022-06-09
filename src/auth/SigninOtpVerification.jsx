@@ -14,7 +14,7 @@ const SigninOtpVerification = () => {
     const enteredOtp = parseInt(otp);
     try {
       const response = await apnaMart.post(
-        "/auth/administrator/login/otp",
+        "/auth/administrator/login/otp-verification",
         {
           email: email,
           otp: enteredOtp,

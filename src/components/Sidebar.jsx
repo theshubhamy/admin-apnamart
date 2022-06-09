@@ -13,6 +13,7 @@ const Sidebar = () => {
   const SignoutHandler = () => {
     try {
       authContext.logout();
+      
     } catch (error) {
       console.log(error.message);
     }
@@ -74,25 +75,25 @@ const Sidebar = () => {
 
             <div className="xl:mt-6 flex flex-col justify-start items-start  px-2 w-full space-y-2 pb-5 ">
               <Link
-                to="/dadhboard"
+                to="/dashboard"
                 onClick={() => setCollapseShow("hidden")}
                 className="focus:outline-none flex jusitfy-start hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4 items-center space-x-6 w-full "
               >
                 <p className="text-base leading-4 ">Dashboard</p>
               </Link>
               <Link
-                to="/"
+                to="/user-list"
                 onClick={() => setCollapseShow("hidden")}
                 className="focus:outline-none flex jusitfy-start hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4  items-center w-full  space-x-6"
               >
-                <p className="text-base leading-4 ">Email</p>
+                <p className="text-base leading-4 ">User List</p>
               </Link>
               <Link
                 to="/"
                 onClick={() => setCollapseShow("hidden")}
                 className="focus:outline-none flex justify-start items-center space-x-6 hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded  py-3 pl-4  w-full "
               >
-                <p className="text-base leading-4  ">Security</p>
+                <p className="text-base leading-4  ">Product</p>
               </Link>
               <Link
                 to="/"

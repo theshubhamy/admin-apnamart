@@ -17,7 +17,7 @@ const Signin = () => {
         toast.warn("Please enter a valid credentials (non empty Value).");
       } else {
         const response = await apnaMart.post(
-          `/auth/administrator/login/email`,
+          `/auth/administrator/login`,
           { email, password },
           {
             headers: {

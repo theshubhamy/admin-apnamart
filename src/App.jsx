@@ -7,6 +7,8 @@ import AuthContext from "./store/authContext";
 import Sidebar from "./components/Sidebar";
 //pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
+const User = lazy(() => import("./pages/Users"));
+
 const Signin = lazy(() => import("./auth/Signin"));
 const SigninOtpVerification = lazy(() =>
   import("./auth/SigninOtpVerification")
@@ -34,12 +36,20 @@ const App = () => {
           }
         ></Route>
         {isSignedin && (
-          <Route
-            path="/dashboard"
-            element={
-              isSignedin ? <Dashboard /> : <Navigate to="/" replace="true" />
-            }
-          ></Route>
+          <>
+            <Route
+              path="/dashboard"
+              element={
+                isSignedin ? <Dashboard /> : <Navigate to="/" replace="true" />
+              }
+            ></Route>
+            <Route
+              path="/user-list"
+              element={
+                isSignedin ? <User /> : <Navigate to="/" replace="true" />
+              }
+            ></Route>
+          </>
         )}
         <Route
           path="*"
