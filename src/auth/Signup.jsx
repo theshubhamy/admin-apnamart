@@ -13,28 +13,32 @@ const Signup = () => {
 
   const signUpHandler = async (e) => {
     e.preventDefault();
-    try {
-      const response = await apnaMart.post(
-        "/auth/administrator/signup",
-        {
-          name,
-          email,
-          phone,
-          password,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
+    if (name !== "" && phone.length === 10 && password !== "" && email !== "") {
+      try {
+        const response = await apnaMart.post(
+          "/auth/administrator/signup",
+          {
+            name,
+            email,
+            phone,
+            password,
+          },
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        if (response.status === 201) {
+          toast(response.data.msg);
+          navigate("../auth/signup/otp-verification", { replace: true });
+          userContext.setEmail(email);
+        } else {
+          toast.warn(response.data.msg);
         }
-      );
-      if (response.status === 201) {
-        toast(response.data.msg);
-        navigate("../auth/signup/otp-verification", { replace: true });
-        userContext.setEmail(email);
-      } else {
-        toast.warn(response.data.msg);
+      } catch (error) {
+        toast.error(error.response.data.msg);
       }
-    } catch (error) {
-      toast.error(error.response.data.msg);
+    } else {
+      toast.warn("please enter valid details.");
     }
   };
   return (

@@ -26,7 +26,6 @@ const SignupOtpVerification = () => {
 
       if (response.status === 201) {
         toast.success(response.data.msg);
-        console.log(response);
         navigate("../", { replace: true });
       } else {
         toast.warn(response.data.msg);
