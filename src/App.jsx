@@ -8,7 +8,10 @@ import Sidebar from "./components/Sidebar";
 //pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const User = lazy(() => import("./pages/Users"));
-
+const Product = lazy(() => import("./pages/Product"));
+const Categories = lazy(() => import("./pages/Categories"));
+const Brand = lazy(() => import("./pages/Brand"));
+//auth
 const Signin = lazy(() => import("./auth/Signin"));
 const SigninOtpVerification = lazy(() =>
   import("./auth/SigninOtpVerification")
@@ -42,13 +45,31 @@ const App = () => {
               element={
                 isSignedin ? <Dashboard /> : <Navigate to="/" replace="true" />
               }
-            ></Route>
+            />
             <Route
               path="/user-list"
               element={
                 isSignedin ? <User /> : <Navigate to="/" replace="true" />
               }
-            ></Route>
+            />
+            <Route
+              path="/products"
+              element={
+                isSignedin ? <Product /> : <Navigate to="/" replace="true" />
+              }
+            />
+            <Route
+              path="/categories"
+              element={
+                isSignedin ? <Categories /> : <Navigate to="/" replace="true" />
+              }
+            />
+            <Route
+              path="/brands"
+              element={
+                isSignedin ? <Brand /> : <Navigate to="/" replace="true" />
+              }
+            />
           </>
         )}
         <Route

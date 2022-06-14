@@ -23,7 +23,6 @@ const SignupOtpVerification = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-
       if (response.status === 201) {
         toast.success(response.data.msg);
         navigate("../", { replace: true });

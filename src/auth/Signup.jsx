@@ -13,54 +13,49 @@ const Signup = () => {
 
   const signUpHandler = async (e) => {
     e.preventDefault();
-    if (name !== "" && phone.length === 10 && password !== "" && email !== "") {
-      try {
-        const response = await apnaMart.post(
-          "/auth/administrator/signup",
-          {
-            name,
-            email,
-            phone,
-            password,
-          },
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        );
-        if (response.status === 201) {
-          toast(response.data.msg);
-          navigate("../auth/signup/otp-verification", { replace: true });
-          userContext.setEmail(email);
-        } else {
-          toast.warn(response.data.msg);
+    try {
+      const response = await apnaMart.post(
+        "/auth/administrator/signup",
+        {
+          name,
+          email,
+          phone,
+          password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
         }
-      } catch (error) {
-        toast.error(error.response.data.msg);
+      );
+      if (response.status === 201) {
+        toast(response.data.msg);
+        navigate("../auth/signup/otp-verification", { replace: true });
+        userContext.setEmail(email);
+      } else {
+        toast.warn(response.data.msg);
       }
-    } else {
-      toast.warn("please enter valid details.");
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   };
   return (
     <>
       <div className="min-h-screen px-6  flex items-center justify-center ">
         <div className="max-w-md w-full">
-          <div>
-            <h2 className="mt-6  text-center text-3xl font-bold text-gray-900">
-              Create an Account
-            </h2>
-            <div className="mt-2 px-4 text-center text-sm text-gray-600">
-              <span className="px-1 text-lg font-semibold">
-                Already have an Account ?
-              </span>
-              <Link
-                to="/auth/Signin"
-                className="font-semibold text-indigo-500 text-xl hover:text-indigo-500"
-              >
-                Sign in
-              </Link>
-            </div>
+          <h2 className="mt-6  text-center text-3xl font-bold text-indigo-600">
+            Create an Account
+          </h2>
+          <div className="mt-2 px-4 text-center text-sm text-gray-600">
+            <span className="px-1 text-lg font-semibold">
+              Already have an Account ?
+            </span>
+            <Link
+              to="/auth/Signin"
+              className="font-semibold text-indigo-500 text-xl hover:text-indigo-500"
+            >
+              Sign in
+            </Link>
           </div>
+
           <form className=" space-y-6" onSubmit={signUpHandler}>
             <div className="rounded-md  ">
               <div className="">
@@ -74,7 +69,7 @@ const Signup = () => {
                   autoComplete="off"
                   value={name}
                   onChange={(e) => setname(e.target.value)}
-                  required
+                  
                   className="rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder=" Enter Name"
                 />
@@ -90,7 +85,6 @@ const Signup = () => {
                   autoComplete="off"
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
-                  required
                   className="relative  rounded block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email Address"
                 />
@@ -106,7 +100,6 @@ const Signup = () => {
                   autoComplete="off"
                   value={phone}
                   onChange={(e) => setphone(e.target.value)}
-                  required
                   className="relative  rounded block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Phone Number"
                 />
@@ -121,7 +114,6 @@ const Signup = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setpassword(e.target.value)}
-                  required
                   autoComplete="off"
                   className="rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder=" Enter Password"

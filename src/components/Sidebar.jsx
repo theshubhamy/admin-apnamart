@@ -13,7 +13,6 @@ const Sidebar = () => {
   const SignoutHandler = () => {
     try {
       authContext.logout();
-      
     } catch (error) {
       console.log(error.message);
     }
@@ -29,9 +28,9 @@ const Sidebar = () => {
           <Link
             exact="true"
             to="/"
-            className="flex-shrink-0 flex items-center justify-center text-indigo-600 text-4xl px-3 py-2 font-bold rounded-md "
+            className="flex-shrink-0 flex items-center justify-center text-indigo-600 text-4xl py-2 font-bold rounded-md "
           >
-            Apna Mart
+            ApnaMart
           </Link>
           <div className=" md:hidden">
             <button
@@ -58,7 +57,7 @@ const Sidebar = () => {
                     to="/"
                     className="flex-shrink-0 flex items-center grow text-center text-4xl text-indigo-600  py-2 font-bold rounded-md "
                   >
-                    Apna Mart
+                    ApnaMart
                   </Link>
                 </div>
                 <div className="w-6/12 flex  right-0 justify-end">
@@ -86,21 +85,28 @@ const Sidebar = () => {
                 onClick={() => setCollapseShow("hidden")}
                 className="focus:outline-none flex jusitfy-start hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4  items-center w-full  space-x-6"
               >
-                <p className="text-base leading-4 ">User List</p>
+                <p className="text-base leading-4 ">Users</p>
               </Link>
               <Link
-                to="/"
+                to="/products"
                 onClick={() => setCollapseShow("hidden")}
                 className="focus:outline-none flex justify-start items-center space-x-6 hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded  py-3 pl-4  w-full "
               >
                 <p className="text-base leading-4  ">Product</p>
               </Link>
               <Link
-                to="/"
+                to="/brands"
                 onClick={() => setCollapseShow("hidden")}
                 className="flex justify-start items-center space-x-6 hover:text-white focus:outline-none focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4  w-full "
               >
-                <p className="text-base leading-4  ">Goals</p>
+                <p className="text-base leading-4">Brands</p>
+              </Link>
+              <Link
+                to="/categories"
+                onClick={() => setCollapseShow("hidden")}
+                className="flex justify-start items-center space-x-6 hover:text-white focus:outline-none focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4  w-full "
+              >
+                <p className="text-base leading-4  ">Categories</p>
               </Link>
             </div>
             <div className="w-full px-4">

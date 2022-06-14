@@ -30,11 +30,11 @@ const Signin = () => {
           navigate("../auth/signin/otp-verification", { replace: true });
           userContext.setEmail(email);
         } else {
-          toast.error(response.msg);
+          toast.error(response.data.message);
         }
       }
     } catch (error) {
-      toast.error(error.response.msg);
+      toast.error(error.response.data.message);
     }
   };
   return (
