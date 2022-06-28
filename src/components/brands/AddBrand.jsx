@@ -1,14 +1,12 @@
-import React, { useState, useContext } from "react";
-import apnaMart from "../../api/apnaMart";
-import AuthContext from "../../store/authContext";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
-const AddBrand = () => {
-  const authContext = useContext(AuthContext);
+
+const AddBrand = (props) => {
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
   const [coverImage, setcoverImage] = useState("");
   const [brandLogo, setbrandLogo] = useState("");
-  const createBrandHandler = async (e) => {
+  const brandHandler = async (e) => {
     e.preventDefault();
     try {
       const formData = new FormData();
@@ -16,33 +14,23 @@ const AddBrand = () => {
       formData.append("description", description);
       formData.append("icon", brandLogo);
       formData.append("image", coverImage);
-      if (
-        name === "" ||
-        description === "" ||
-        coverImage === "" ||
-        brandLogo === ""
-      ) {
+      if (name === "" || description === "" || brandLogo === "") {
         toast.warn("Please enter a valid details (non empty Value).");
       } else {
-        const response = await apnaMart.post(
-          `/administrator/add-brand`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${authContext.token}`,
-            },
-          }
-        );
-        if (response.status === 201) {
-          console.log(response.data);
-        }
+        props.onSave(formData);
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error(error.respnse.message);
+    }
+    props.onCancel();
+    setname("");
+    setdescription("");
+    setcoverImage("");
+    setbrandLogo("");
   };
 
   return (
-    <div>
+    <>
       <div className="mt-4 md:mt-10 md:col-span-2">
         <div className="shadow sm:rounded-md sm:overflow-hidden">
           <div className="px-4 py-5 bg-gray-50 space-y-4 sm:p-6">
@@ -69,7 +57,6 @@ const AddBrand = () => {
                 </div>
               </div>
             </div>
-
             <div>
               <label
                 htmlFor="description"
@@ -129,7 +116,6 @@ const AddBrand = () => {
                 </label>
               </div>
             </div>
-
             <div>
               <label
                 htmlFor="file-upload"
@@ -176,17 +162,23 @@ const AddBrand = () => {
               </div>
             </div>
           </div>
-          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+          <div className="px-4 py-3 space-x-4 bg-gray-50 text-right sm:px-6">
             <button
-              onClick={createBrandHandler}
-              className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              onClick={props.onCancel}
+              className="inline-flex justify-center whitespace-nowrap py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Create
+              Cancel
+            </button>
+            <button
+              onClick={brandHandler}
+              className="inline-flex justify-center whitespace-nowrap py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Create Brand
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

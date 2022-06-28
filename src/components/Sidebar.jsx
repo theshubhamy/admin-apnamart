@@ -81,18 +81,19 @@ const Sidebar = () => {
                 <p className="text-base leading-4 ">Dashboard</p>
               </Link>
               <Link
-                to="/user-list"
+                to="/dashboard"
                 onClick={() => setCollapseShow("hidden")}
-                className="focus:outline-none flex jusitfy-start hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4  items-center w-full  space-x-6"
+                className="focus:outline-none flex jusitfy-start hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4 items-center space-x-6 w-full "
               >
-                <p className="text-base leading-4 ">Users</p>
+                <p className="text-base leading-4 ">Orders</p>
               </Link>
+
               <Link
                 to="/products"
                 onClick={() => setCollapseShow("hidden")}
                 className="focus:outline-none flex justify-start items-center space-x-6 hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded  py-3 pl-4  w-full "
               >
-                <p className="text-base leading-4  ">Product</p>
+                <p className="text-base leading-4  ">Products</p>
               </Link>
               <Link
                 to="/brands"
@@ -108,26 +109,16 @@ const Sidebar = () => {
               >
                 <p className="text-base leading-4  ">Categories</p>
               </Link>
-            </div>
-            <div className="w-full px-4">
-              <hr className=" border-indigo-00 w-full" />
-            </div>
-            <div className="mt-6 flex flex-col justify-start items-start  px-4 w-full space-y-3 pb-5 ">
               <Link
-                to="/"
+                to="/user-list"
                 onClick={() => setCollapseShow("hidden")}
-                className="focus:outline-none flex justify-start items-center space-x-6 hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded  py-3 pl-4  w-full "
+                className="focus:outline-none flex jusitfy-start hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4  items-center w-full  space-x-6"
               >
-                <p className="text-base leading-4  ">Security</p>
-              </Link>
-              <Link
-                to="/"
-                onClick={() => setCollapseShow("hidden")}
-                className="focus:outline-none flex justify-start items-center space-x-6 hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded  py-3 pl-4  w-full "
-              >
-                <p className="text-base leading-4  ">Settings</p>
+                <p className="text-base leading-4 ">Users</p>
               </Link>
             </div>
+            
+            
             <div className="flex flex-col justify-between items-center">
               <div className="w-full px-4">
                 <hr className=" border-gray-100 w-full" />

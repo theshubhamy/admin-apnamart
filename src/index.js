@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import { AuthContextProvider } from "./store/authContext";
@@ -13,7 +14,9 @@ root.render(
     <AuthContextProvider>
       <UserContextProvider>
         <Suspense fallback={<ThemedSuspense />}>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </Suspense>
       </UserContextProvider>
     </AuthContextProvider>
@@ -21,3 +24,21 @@ root.render(
 );
 
 reportWebVitals();
+
+// //  <TextField
+//           className="search-desktop"
+//           size="small"
+//           onChange={(e) => {
+//             debounceSearch(e.target.value, debounceTimeout);
+//           }}
+//           InputProps={{
+//             endAdornment: (
+//               <InputAdornment position="end">
+//                 <Search color="primary" />
+//               </InputAdornment>
+//             ),
+//           }}
+//           placeholder="Search for items/categories"
+//           name="search"
+//         />
+//

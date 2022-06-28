@@ -8,7 +8,9 @@ const Users = () => {
   const [UserData, setUserData] = useState([]);
   const [userCount, setuserCount] = useState("");
   const authContext = useContext(AuthContext);
+  // eslint-disable-next-line no-unused-vars
   const [offset, setoffset] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [limit, setlimit] = useState(25);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const Users = () => {
     try {
       const token = authContext.token;
       const response = await apnaMart.post(
-        `/administrator/users`,
+        `/admin/users`,
         {
           offset,
           limit,
@@ -49,7 +51,7 @@ const Users = () => {
       {userCount > 0 && (
         <div className="shadow-xl overflow-hidden  my-10 border-b border-gray-200 sm:rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-indigo-400 text-gray-900">
+            <thead className="bg-indigo-200 text-gray-900">
               <tr>
                 <th
                   scope="col"
@@ -77,7 +79,7 @@ const Users = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-indigo-100 text-gray-900 divide-y-2 divide-white">
+            <tbody className="bg-gray-100 text-gray-900 divide-y-2 divide-white">
               {UserData.map((person) => (
                 <tr key={uuidv4()}>
                   <td className="px-6 py-4 whitespace-nowrap text-base font-medium">

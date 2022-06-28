@@ -21,7 +21,7 @@ const OtpCard = (props) => {
 
           <p className="mt-2 text-start text-base text-gray-700">
             An email with your verification code has been sent to{" "}
-            <span className="text-indigo-600">{props.email}</span>.
+            <span className="text-indigo-600 text-lg">{props.email}</span>.
           </p>
         </div>
         <form className="mt-4 space-y-4" onSubmit={formHandler}>
@@ -29,7 +29,7 @@ const OtpCard = (props) => {
             <input
               id="otp"
               name="otp"
-              type="number"
+              type="text"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               required
@@ -39,7 +39,7 @@ const OtpCard = (props) => {
           </div>
           <button
             type="submit"
-            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-xl font-semibold rounded-md text-white bg-indigo-400 hover:bg-indigo-500 focus:bg-indigo-500 hover:text-black "
+            className="group relative leading-none  w-full flex justify-center py-3 px-4 border border-transparent text-xl font-semibold rounded-md text-white bg-indigo-400 hover:bg-indigo-500 focus:bg-indigo-500 hover:text-black "
           >
             Verify Code
           </button>

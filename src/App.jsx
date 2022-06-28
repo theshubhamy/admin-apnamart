@@ -1,5 +1,6 @@
-import React, { useContext, lazy } from "react";
-import { Route, Routes, Navigate, BrowserRouter } from "react-router-dom";
+import React, { useContext, lazy, useEffect } from "react";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 //contextProvider
@@ -22,10 +23,26 @@ const SignupOtpVerification = lazy(() =>
 );
 const NotFound = lazy(() => import("./pages/NotFound"));
 const App = () => {
+  const { pathname } = useLocation();
   const authContext = useContext(AuthContext);
   const isSignedin = authContext.isLoggedIn;
+  // always scroll to top on route/path change
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [pathname]);
+  // disable right click
+  // window.addEventListener("contextmenu", (e) => e.preventDefault());
+  // window.addEventListener("keydown", (e) => {
+  //   if (e.key === "F12") e.preventDefault();
+  //   if (e.ctrlKey && e.shiftKey && e.key === "I") e.preventDefault();
+  //   if (e.ctrlKey && e.shiftKey && e.key === "J") e.preventDefault();
+  // });
   return (
-    <BrowserRouter>
+    <>
       {isSignedin && <Sidebar />}
       <Routes>
         <Route
@@ -128,7 +145,7 @@ const App = () => {
         pauseOnFocusLoss
         draggable
       />
-    </BrowserRouter>
+    </>
   );
 };
 
