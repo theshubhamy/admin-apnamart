@@ -31,12 +31,9 @@ const AddBrand = (props) => {
 
   return (
     <>
-      <div className="mt-4 md:mt-10 md:col-span-2">
-        <div className="shadow sm:rounded-md sm:overflow-hidden">
-          <div className="px-4 py-5 bg-gray-50 space-y-4 sm:p-6">
-            <h1 className="text-indigo-600 font-bold text-2xl flex justify-center items-center">
-              Add Brand
-            </h1>
+      <div className=" md:col-span-2">
+        <div className="sm:overflow-hidden ">
+          <div className="px-4 py-10 bg-gray-50 space-y-4 sm:p-6">
             <div className="grid grid-cols-3 gap-6">
               <div className="col-span-3 sm:col-span-2">
                 <label
@@ -162,7 +159,7 @@ const AddBrand = (props) => {
               </div>
             </div>
           </div>
-          <div className="px-4 py-3 space-x-4 bg-gray-50 text-right sm:px-6">
+          <div className="px-4 py-10 space-x-4 bg-gray-50 text-right sm:px-6">
             <button
               onClick={props.onCancel}
               className="inline-flex justify-center whitespace-nowrap py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-400 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

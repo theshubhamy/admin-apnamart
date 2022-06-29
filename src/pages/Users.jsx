@@ -49,7 +49,7 @@ const Users = () => {
     <Main>
       {" "}
       {userCount > 0 && (
-        <div className="shadow-xl overflow-hidden  my-10 border-b border-gray-200 sm:rounded-lg">
+        <div className="shadow-xl overflow-x-auto  my-10 border-b border-gray-200 sm:rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-indigo-200 text-gray-900">
               <tr>
