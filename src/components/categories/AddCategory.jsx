@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-
-const AddBrand = (props) => {
+const AddCategory = (props) => {
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
   const [coverImage, setcoverImage] = useState("");
@@ -77,7 +76,7 @@ const AddBrand = (props) => {
                 htmlFor="brandlogo"
                 className="block text-base font-medium text-indigo-700"
               >
-                Brand Logo
+                Icon
               </label>
               <div className="mt-1 flex items-center">
                 <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
@@ -123,7 +122,7 @@ const AddBrand = (props) => {
               <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-indigo-300 border-dashed rounded-md">
                 <div className="space-y-1 text-center">
                   {coverImage !== "" ? (
-                    <div className=" my-4 md:max-h-80 md:max-w-5xl rounded-full">
+                    <div className=" my-4 md:max-h-80 max-w-5xl  rounded-full">
                       <img src={URL.createObjectURL(coverImage)} alt="logo" />
                     </div>
                   ) : (
@@ -185,4 +184,4 @@ const AddBrand = (props) => {
   );
 };
 
-export default AddBrand;
+export default AddCategory;
