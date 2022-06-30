@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App";
 import { AuthContextProvider } from "./store/authContext";
 import { UserContextProvider } from "./store/userContext";
+import { AppContextProvider } from "./store/appContext";
 import ThemedSuspense from "./layout/ThemedSuspense";
 import reportWebVitals from "./reportWebVitals";
 
@@ -13,11 +14,13 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <UserContextProvider>
-        <Suspense fallback={<ThemedSuspense />}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </Suspense>
+        <AppContextProvider>
+          <Suspense fallback={<ThemedSuspense />}>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </Suspense>
+        </AppContextProvider>
       </UserContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

@@ -10,10 +10,10 @@ const userContext = React.createContext({
   userDetails: () => {},
 });
 const retrieveStoredData = () => {
-  const storedName = localStorage.getItem("name");
-  const storedEmail = localStorage.getItem("email");
-  const storedPhone = localStorage.getItem("phone");
-  const storedProfileImageUrl = localStorage.getItem("profileImageUrl");
+  const storedName = sessionStorage.getItem("name");
+  const storedEmail = sessionStorage.getItem("email");
+  const storedPhone = sessionStorage.getItem("phone");
+  const storedProfileImageUrl = sessionStorage.getItem("profileImageUrl");
 
   return {
     name: storedName,
@@ -44,25 +44,25 @@ export const UserContextProvider = (props) => {
   );
   const userEmailHandler = (email) => {
     setEmail(email);
-    localStorage.setItem("email", email);
+    sessionStorage.setItem("email", email);
   };
   const userPhoneHandler = (phone) => {
     setPhone(phone);
-    localStorage.setItem("phone", phone);
+    sessionStorage.setItem("phone", phone);
   };
   const userNameHandler = (name) => {
     setName(name);
-    localStorage.setItem("name", name);
+    sessionStorage.setItem("name", name);
   };
   const userDetailsHandler = (name, email, phone, profileImageUrl) => {
     setName(name);
-    localStorage.setItem("name", name);
+    sessionStorage.setItem("name", name);
     setEmail(email);
-    localStorage.setItem("email", email);
+    sessionStorage.setItem("email", email);
     setPhone(phone);
-    localStorage.setItem("phone", phone);
+    sessionStorage.setItem("phone", phone);
     setProfileImageUrl(profileImageUrl);
-    localStorage.setItem("profileImageUrl", profileImageUrl);
+    sessionStorage.setItem("profileImageUrl", profileImageUrl);
   };
   const contextValue = {
     name: name,

@@ -4,10 +4,12 @@ import Main from "../layout/Main";
 import AuthContext from "../store/authContext";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import AppContext from "../store/appContext";
 const Users = () => {
   const [UserData, setUserData] = useState([]);
-  const [userCount, setuserCount] = useState("");
+
   const authContext = useContext(AuthContext);
+  const appContext = useContext(AppContext);
   // eslint-disable-next-line no-unused-vars
   const [offset, setoffset] = useState(0);
   // eslint-disable-next-line no-unused-vars
@@ -36,8 +38,8 @@ const Users = () => {
       );
 
       if (response.status === 200) {
-        setuserCount(response.data["users"]["count"]);
         setUserData(response.data["users"]["rows"]);
+        appContext.userDetails(response.data["users"]);
       } else {
         toast(response.data.message);
       }
@@ -48,7 +50,7 @@ const Users = () => {
   return (
     <Main>
       {" "}
-      {userCount > 0 && (
+      {UserData.length > 0 && (
         <div className="shadow-xl overflow-x-auto  my-10 border-b border-gray-200 sm:rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-indigo-200 text-gray-900">

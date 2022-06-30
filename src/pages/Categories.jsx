@@ -47,6 +47,7 @@ const Categories = () => {
       if (response.status === 201) {
         toast.success(response.data.message);
         setIsAddCategory(true);
+        stopEditingHandler();
       }
     } catch (error) {
       toast.error(error.response.message);
