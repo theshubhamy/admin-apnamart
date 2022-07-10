@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import apnaMart from "../api/apnaMart";
 import { toast } from "react-toastify";
 import UserContext from "../store/userContext";
+import AuthContext from "../store/authContext";
 const Signin = () => {
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
+  const authContext = useContext(AuthContext);
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const SigninHandler = async (e) => {
@@ -27,8 +29,20 @@ const Signin = () => {
         );
         if (response.status === 201) {
           toast(response.data.msg);
-          navigate("../auth/signin/otp-verification", { replace: true });
-          userContext.setEmail(email);
+          console.log(response.data);
+          let expirationTime = new Date();
+          expirationTime.setDate(expirationTime.getDate() + 1);
+          authContext.login(
+            response.data.admin.token,
+            expirationTime.toISOString()
+          );
+          userContext.userDetails(
+            response.data.admin.name,
+            response.data.admin.email,
+            response.data.admin.phone,
+            response.data.admin.profileImageUrl
+          );
+          navigate("../", { replace: true });
         } else {
           toast.error(response.data.message);
         }

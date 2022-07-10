@@ -14,9 +14,7 @@ const Categories = lazy(() => import("./pages/Categories"));
 const Brand = lazy(() => import("./pages/Brand"));
 //auth
 const Signin = lazy(() => import("./auth/Signin"));
-const SigninOtpVerification = lazy(() =>
-  import("./auth/SigninOtpVerification")
-);
+
 const Signup = lazy(() => import("./auth/Signup"));
 const SignupOtpVerification = lazy(() =>
   import("./auth/SignupOtpVerification")
@@ -104,16 +102,6 @@ const App = () => {
           path="/auth/signin"
           element={
             !isSignedin ? <Signin /> : <Navigate to="/" replace="true" />
-          }
-        ></Route>
-        <Route
-          path="/auth/signin/otp-verification"
-          element={
-            !isSignedin ? (
-              <SigninOtpVerification />
-            ) : (
-              <Navigate to="/" replace="true" />
-            )
           }
         ></Route>
         <Route
