@@ -44,30 +44,30 @@ const ListBrands = ({ data }) => {
               </tr>
             </thead>
             <tbody className=" text-gray-900 ">
-              {data.map((person) => (
+              {data.map((brand) => (
                 <tr
                   key={uuidv4()}
                   className="h-20 text-sm  text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100"
                 >
                   <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
                     <img
-                      src={`https://api.theshubham.dev/${person.iconUrl}`}
+                      src={`https://api.theshubham.dev/${brand.imageUrl}`}
                       alt=""
                       className="h-10"
                     />
                   </td>
                   <td className="px-6 py-4  capitalize whitespace-nowrap text-base font-medium">
-                    {person.name}
+                    {brand.name}
                   </td>
                   <td className="px-6 py-4 overflow-hidden text-base font-medium">
-                    <p title={person.description} className="w-64 truncate ">
-                      {person.description}
+                    <p title={brand.description} className="w-64 truncate ">
+                      {brand.description}
                     </p>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-base  font-medium">
                     <span className="bg-indigo-200 rounded-full p-1 px-4">
                       {" "}
-                      {person.isActive ? "True" : "False"}
+                      {brand.isActive ? "True" : "False"}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-base font-medium">

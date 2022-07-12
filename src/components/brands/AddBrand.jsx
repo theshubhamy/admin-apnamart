@@ -5,16 +5,16 @@ const AddBrand = (props) => {
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
   const [coverImage, setcoverImage] = useState("");
-  const [brandLogo, setbrandLogo] = useState("");
+
   const brandHandler = async (e) => {
     e.preventDefault();
     try {
       const formData = new FormData();
       formData.append("name", name);
       formData.append("description", description);
-      formData.append("icon", brandLogo);
+
       formData.append("image", coverImage);
-      if (name === "" || description === "" || brandLogo === "") {
+      if (name === "" || description === "" || coverImage === "") {
         toast.warn("Please enter a valid details (non empty Value).");
       } else {
         props.onSave(formData);
@@ -25,7 +25,6 @@ const AddBrand = (props) => {
     setname("");
     setdescription("");
     setcoverImage("");
-    setbrandLogo("");
   };
 
   return (
@@ -71,53 +70,13 @@ const AddBrand = (props) => {
                 />
               </div>
             </div>
-            <div>
-              <label
-                htmlFor="brandlogo"
-                className="block text-base font-medium text-indigo-700"
-              >
-                Brand Logo
-              </label>
-              <div className="mt-1 flex items-center">
-                <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                  {brandLogo !== "" ? (
-                    <div className=" h-12 w-12 rounded-full">
-                      <img src={URL.createObjectURL(brandLogo)} alt="logo" />
-                    </div>
-                  ) : (
-                    <svg
-                      className="h-full w-full text-gray-300"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  )}
-                </span>
-                <label
-                  htmlFor="brandlogo"
-                  className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Change
-                  <input
-                    onChange={(e) => {
-                      setbrandLogo(e.target.files[0]);
-                    }}
-                    accept="image/*"
-                    id="brandlogo"
-                    name="brandlogo"
-                    type="file"
-                    className="sr-only"
-                  />
-                </label>
-              </div>
-            </div>
+
             <div>
               <label
                 htmlFor="file-upload"
                 className="block text-base font-medium text-indigo-700"
               >
-                Cover photo
+                brand image
               </label>
               <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-indigo-300 border-dashed rounded-md">
                 <div className="space-y-1 text-center">

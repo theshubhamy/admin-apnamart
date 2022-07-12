@@ -4,16 +4,23 @@ const AddProduct = (props) => {
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
   const [coverImage, setcoverImage] = useState("");
-  const [brandLogo, setbrandLogo] = useState("");
+  const [price, setPrice] = useState("");
+  const [stock, setStock] = useState("");
+  const [discount, setDiscount] = useState("");
+  const [category, setCategory] = useState("");
+  const [brand, setBrand] = useState("");
+  const [highlights, setHighlights] = useState("");
+  const [specifications, setSpecifications] = useState("");
+  const [ratings, setRatings] = useState("");
   const brandHandler = async (e) => {
     e.preventDefault();
     try {
       const formData = new FormData();
       formData.append("name", name);
       formData.append("description", description);
-      formData.append("icon", brandLogo);
+
       formData.append("image", coverImage);
-      if (name === "" || description === "" || brandLogo === "") {
+      if (name === "" || description === "" || coverImage === "") {
         toast.warn("Please enter a valid details (non empty Value).");
       } else {
         props.onSave(formData);
@@ -24,7 +31,6 @@ const AddProduct = (props) => {
     setname("");
     setdescription("");
     setcoverImage("");
-    setbrandLogo("");
   };
 
   return (
@@ -32,10 +38,10 @@ const AddProduct = (props) => {
       <div className=" md:col-span-2 rounded-b-lg">
         <div className="sm:overflow-hidden   ">
           <div className="px-4 py-10 space-y-4 sm:p-6">
-            <div className="grid grid-cols-3 gap-6">
-              <div className="col-span-3 sm:col-span-2">
+            <div className="grid grid-cols-6 gap-6">
+              <div className="col-span-6 ">
                 <label
-                  htmlFor="brandTitle"
+                  htmlFor="name"
                   className="block text-base font-medium text-indigo-700"
                 >
                   Name
@@ -43,13 +49,163 @@ const AddProduct = (props) => {
                 <div className="mt-1 flex rounded-md shadow-sm">
                   <input
                     type="text"
-                    name="brandTitle"
-                    id="brandTitle"
+                    name="name"
+                    id="name"
                     value={name}
                     onChange={(e) => setname(e.target.value)}
                     className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full  rounded-md sm:text-sm border-gray-300"
                   />
                 </div>
+              </div>
+
+              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label
+                  htmlFor="category"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Category
+                </label>
+                <select
+                  id="category"
+                  name="category"
+                  autoComplete="category"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                >
+                  <option value="">Select Category</option>
+                  <option>United States</option>
+                  <option>Canada</option>
+                  <option>Mexico</option>
+                </select>
+              </div>
+              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label
+                  htmlFor="Brand"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Brand
+                </label>
+                <select
+                  id="Brand"
+                  name="Brand"
+                  autoComplete="Brand"
+                  value={brand}
+                  onChange={(e) => setBrand(e.target.value)}
+                  className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                >
+                  <option value="">Select Brand</option>
+                  <option>mobiles</option>
+                  <option>all</option>
+                  <option>Mexico</option>
+                </select>
+              </div>
+              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label
+                  htmlFor="Ratings"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Ratings
+                </label>
+                <input
+                  type="number"
+                  name="Ratings"
+                  id="Ratings"
+                  autoComplete="Ratings"
+                  value={ratings}
+                  onChange={(e) => setRatings(e.target.value)}
+                  className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-6 lg:col-span-2">
+                <label
+                  htmlFor="city"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Price
+                </label>
+                <input
+                  type="text"
+                  name="city"
+                  id="city"
+                  autoComplete="address-level2"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label
+                  htmlFor="Discount"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Discount
+                </label>
+                <input
+                  type="number"
+                  name="Discount"
+                  id="Discount"
+                  autoComplete="Discount"
+                  value={discount}
+                  onChange={(e) => setDiscount(e.target.value)}
+                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label
+                  htmlFor="Stock"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Stock
+                </label>
+                <input
+                  type="text"
+                  name="Stock"
+                  id="Stock"
+                  autoComplete="Stock"
+                  value={stock}
+                  onChange={(e) => setStock(e.target.value)}
+                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="specifications"
+                className="block text-base font-medium text-indigo-700"
+              >
+                Specifications
+              </label>
+              <div className="mt-1">
+                <textarea
+                  id="specifications"
+                  name="specifications"
+                  rows={2}
+                  value={specifications}
+                  onChange={(e) => setSpecifications(e.target.value)}
+                  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="highlights"
+                className="block text-base font-medium text-indigo-700"
+              >
+                highlights
+              </label>
+              <div className="mt-1">
+                <textarea
+                  id="highlights"
+                  name="highlights"
+                  rows={2}
+                  value={highlights}
+                  onChange={(e) => setHighlights(e.target.value)}
+                  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                />
               </div>
             </div>
             <div>
@@ -70,47 +226,7 @@ const AddProduct = (props) => {
                 />
               </div>
             </div>
-            <div>
-              <label
-                htmlFor="brandlogo"
-                className="block text-base font-medium text-indigo-700"
-              >
-                Brand Logo
-              </label>
-              <div className="mt-1 flex items-center">
-                <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-                  {brandLogo !== "" ? (
-                    <div className=" h-12 w-12 rounded-full">
-                      <img src={URL.createObjectURL(brandLogo)} alt="logo" />
-                    </div>
-                  ) : (
-                    <svg
-                      className="h-full w-full text-gray-300"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                  )}
-                </span>
-                <label
-                  htmlFor="brandlogo"
-                  className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Change
-                  <input
-                    onChange={(e) => {
-                      setbrandLogo(e.target.files[0]);
-                    }}
-                    accept="image/*"
-                    id="brandlogo"
-                    name="brandlogo"
-                    type="file"
-                    className="sr-only"
-                  />
-                </label>
-              </div>
-            </div>
+
             <div>
               <label
                 htmlFor="file-upload"

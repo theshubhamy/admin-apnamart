@@ -25,27 +25,27 @@ const Categories = () => {
 
   const getCategories = async () => {
     try {
-      const response = await apnaMart.get("/admin/Category", {
+      const response = await apnaMart.get("/admin/get-all-categories", {
         headers: { Authorization: `Bearer ${authContext.token}` },
       });
       if (response.status === 200) {
-        setCategories(response.data.category.rows);
+        setCategories(response.data.categories);
         setIsAddCategory(false);
       }
     } catch (error) {
-      toast(error.response.message);
+      toast(error.response.msg);
     }
   };
   const createCategoryHandler = async (formData) => {
     try {
-      const response = await apnaMart.post(`/admin/add-category`, formData, {
+      const response = await apnaMart.post(`/admin/create-category`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${authContext.token}`,
         },
       });
       if (response.status === 201) {
-        toast.success(response.data.message);
+        toast.success(response.data.msg);
         setIsAddCategory(true);
         stopEditingHandler();
       }

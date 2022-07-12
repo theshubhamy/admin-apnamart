@@ -28,7 +28,7 @@ const Signin = () => {
           }
         );
         if (response.status === 201) {
-          toast(response.data.msg);
+          toast.success(response.data.msg);
           console.log(response.data);
           let expirationTime = new Date();
           expirationTime.setDate(expirationTime.getDate() + 1);

@@ -40,7 +40,7 @@ const App = () => {
   //   if (e.ctrlKey && e.shiftKey && e.key === "J") e.preventDefault();
   // });
   return (
-    <>
+    <React.StrictMode>
       {isSignedin && <Sidebar />}
       <Routes>
         <Route
@@ -124,7 +124,7 @@ const App = () => {
 
       {/* tost */}
       <ToastContainer
-        position="top-center"
+        position="top-right"
         autoClose={2000}
         hideProgressBar={false}
         newestOnTop
@@ -133,7 +133,7 @@ const App = () => {
         pauseOnFocusLoss
         draggable
       />
-    </>
+    </React.StrictMode>
   );
 };
 

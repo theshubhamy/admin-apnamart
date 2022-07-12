@@ -24,11 +24,11 @@ const Brand = () => {
 
   const getBrands = async () => {
     try {
-      const response = await apnaMart.get("/admin/brands", {
+      const response = await apnaMart.get("/admin/get-all-brands", {
         headers: { Authorization: `Bearer ${authContext.token}` },
       });
       if (response.status === 200) {
-        setBrands(response.data.brands.rows);
+        setBrands(response.data.brands);
         setIsAddBrand(false);
       }
     } catch (error) {
@@ -37,7 +37,7 @@ const Brand = () => {
   };
   const createBrandHandler = async (formData) => {
     try {
-      const response = await apnaMart.post(`/admin/add-brand`, formData, {
+      const response = await apnaMart.post(`/admin/create-brand`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${authContext.token}`,
