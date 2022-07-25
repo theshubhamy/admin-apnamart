@@ -31,13 +31,13 @@ const App = () => {
       behavior: "smooth",
     });
   }, [pathname]);
-  // disable right click
-  // window.addEventListener("contextmenu", (e) => e.preventDefault());
-  // window.addEventListener("keydown", (e) => {
-  //   if (e.key === "F12") e.preventDefault();
-  //   if (e.ctrlKey && e.shiftKey && e.key === "I") e.preventDefault();
-  //   if (e.ctrlKey && e.shiftKey && e.key === "J") e.preventDefault();
-  // });
+  //disable right click
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "F12") e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key === "I") e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && e.key === "J") e.preventDefault();
+  });
   return (
     <React.StrictMode>
       {userInfo !== null && <Sidebar />}
