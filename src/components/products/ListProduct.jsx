@@ -1,16 +1,12 @@
 import React from "react";
-import {
-  TrashIcon,
-  PencilAltIcon,
-  CurrencyRupeeIcon,
-} from "@heroicons/react/outline";
+import { TrashIcon, PencilAltIcon } from "@heroicons/react/outline";
 import { v4 as uuidv4 } from "uuid";
 
 const ListProduct = ({ data }) => {
   return (
     <>
-      {data.length > 0 && (
-        <div className=" overflow-x-auto  ">
+      {data?.length > 0 && (
+        <div className=" overflow-x-auto   ">
           <table className="min-w-full rounded-b-lg ">
             <thead className="  h-16 text-indigo-700">
               <tr>
@@ -78,8 +74,8 @@ const ListProduct = ({ data }) => {
                 ></th>
               </tr>
             </thead>
-            <tbody className=" text-gray-900 ">
-              {data.map((person) => (
+            <tbody className=" text-gray-900  items-center ">
+              {data?.map((person) => (
                 <tr
                   key={uuidv4()}
                   className="h-20 text-sm  text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100"
@@ -93,26 +89,25 @@ const ListProduct = ({ data }) => {
                   </td>
                   <td className="px-4 py-4  capitalize whitespace-nowrap text-base font-medium">
                     <p title={person.title} className="w-48 truncate ">
-                      {person.title}
+                      {person.name}
                     </p>
                   </td>
                   <td className="px-4 py-4  capitalize whitespace-nowrap text-base font-medium">
-                    {person.brand}
+                    {person.brand.brandName}
                   </td>
                   <td className="px-4 py-4  capitalize whitespace-nowrap text-base font-medium">
                     {person.category}
                   </td>
-                  <td className="px-6 py-4 overflow-hidden flex  items-center text-base font-medium">
-                    <CurrencyRupeeIcon className="h-5 bg-transparent px-1" />
-                    {person.costPrice.toFixed(2)}
+                  <td className="px-4 py-4   capitalize whitespace-nowrap text-base font-medium">
+                    {person.price.toFixed(2)}
                   </td>
-                  <td className="px-6 py-4 overflow-hidden text-base font-medium">
+                  <td className="px-4 py-4  capitalize whitespace-nowrap text-base font-medium">
                     {person.discount}%
                   </td>
-                  <td className="px-6 py-4 overflow-hidden text-base font-medium">
+                  <td className="px-4 py-4  capitalize whitespace-nowrap text-base font-medium">
                     {person.stock}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-base  font-medium">
+                  <td className="px-4 py-4  capitalize whitespace-nowrap text-base font-medium">
                     <span className="bg-indigo-200 rounded-full p-1 px-4">
                       {" "}
                       {person.isActive ? "True" : "False"}

@@ -1,55 +1,35 @@
 import { Link } from "react-router-dom";
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { LockClosedIcon } from "@heroicons/react/solid";
-import { useNavigate } from "react-router-dom";
-import apnaMart from "../api/apnaMart";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import UserContext from "../store/userContext";
-import AuthContext from "../store/authContext";
+import { login } from "../store/actions/userActions";
+
 const Signin = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userContext = useContext(UserContext);
-  const authContext = useContext(AuthContext);
+
+  const location = useLocation();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+
+  const { error, userInfo } = useSelector((state) => state.userLogin);
+
+  let redirectPath = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+    if (userInfo !== null) {
+      navigate(redirectPath, { replace: true });
+    }
+  }, [dispatch, error, userInfo, redirectPath, navigate]);
+
   const SigninHandler = async (e) => {
     e.preventDefault();
-    try {
-      if (email === "" && password === "") {
-        toast.warn("Please enter a valid credentials (non empty Value).");
-      } else {
-        const response = await apnaMart.post(
-          `/auth/administrator/login`,
-          { email, password },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (response.status === 201) {
-          toast.success(response.data.msg);
-          console.log(response.data);
-          let expirationTime = new Date();
-          expirationTime.setDate(expirationTime.getDate() + 1);
-          authContext.login(
-            response.data.admin.token,
-            expirationTime.toISOString()
-          );
-          userContext.userDetails(
-            response.data.admin.name,
-            response.data.admin.email,
-            response.data.admin.phone,
-            response.data.admin.profileImageUrl
-          );
-          navigate("../", { replace: true });
-        } else {
-          toast.error(response.data.message);
-        }
-      }
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
+    dispatch(login(email, password));
   };
   return (
     <>

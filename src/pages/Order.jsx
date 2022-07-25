@@ -1,26 +1,24 @@
 import React, { useEffect } from "react";
-
 import Main from "../layout/Main";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllUsers } from "../store/actions/userActions";
 import { v4 as uuidv4 } from "uuid";
-
-const Users = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { getAllOrders } from "../store/actions/orderAction";
+const Order = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.users);
-  useEffect(() => {
-    dispatch(getAllUsers());
-    return () => {};
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
+  const { orders } = useSelector((state) => state.orders);
+
+  useEffect(() => {
+    dispatch(getAllOrders());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
   return (
     <Main>
       <div className="flex justify-center items-center mt-5">
-        <h1 className="text-indigo-600 font-bold text-4xl">Users</h1>
+        <h1 className="text-indigo-600 font-bold text-4xl">Orders</h1>
       </div>
 
-      {users.length > 0 && (
+      {orders?.length > 0 && (
         <div className="shadow overflow-x-auto  my-10 border-b border-gray-200 sm:rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-indigo-200 text-gray-900">
@@ -29,58 +27,51 @@ const Users = () => {
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold text-gray-900 capatalize tracking-wider"
                 >
-                  Name
+                  OrderID
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold text-gray-900 capatalize tracking-wider"
                 >
-                  Email
+                  BuyerEmail
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold text-gray-900 capitalize  tracking-wider"
                 >
-                  Phone
+                  TotalAmount
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold text-gray-900 capitalize  tracking-wider"
                 >
-                  Address
+                  PaymentStatus
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold text-gray-900 capatalize tracking-wider"
                 >
-                  Role
+                  OrderStatus
                 </th>
               </tr>
             </thead>
             <tbody className="bg-gray-100 text-gray-900 divide-y-2 divide-white">
-              {users.map((person) => (
+              {orders?.map((item) => (
                 <tr key={uuidv4()}>
                   <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
-                    {person.name}
+                    {item.razorpay.orderId}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
-                    {person.email}
+                    {item.email}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
-                    {person.phone}
+                    {item.totalAmount}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
-                    {person.address.city ? (
-                      <>
-                        <span>{person.address.city}</span>,
-                        <span> {person.address.zip}</span>
-                      </>
-                    ) : (
-                      "N/A"
-                    )}
+                    {item.paymentStatus}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
-                    {person.isAdmin ? "Admin" : "User"}
+                    {item.orderStatus}
                   </td>
                 </tr>
               ))}
@@ -92,4 +83,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Order;

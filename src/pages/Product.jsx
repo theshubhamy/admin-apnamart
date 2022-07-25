@@ -1,15 +1,17 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Main from "../layout/Main";
-import AuthContext from "../store/authContext";
 import apnaMart from "../api/apnaMart";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllProducts } from "../store/actions/productAction";
 import AddProduct from "../components/products/AddProduct";
 import ListProduct from "../components/products/ListProduct";
 import { toast } from "react-toastify";
-const Products = () => {
-  const authContext = useContext(AuthContext);
+const Product = () => {
+  const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
-  const [products, setproducts] = useState([]);
   const [isAddProduct, setIsAddProduct] = useState(false);
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const { products } = useSelector((state) => state.allProducts);
   const startEditingHandler = () => {
     setIsEdit(true);
   };
@@ -17,36 +19,17 @@ const Products = () => {
     setIsEdit(false);
   };
   useEffect(() => {
-    getProducts();
+    dispatch(getAllProducts());
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddProduct]);
-  const getProducts = async () => {
-    try {
-      const response = await apnaMart.post(
-        "/admin/all-products",
-        {
-          offset: 0,
-          limit: 25,
-        },
-        {
-          headers: { Authorization: `Bearer ${authContext.token}` },
-        }
-      );
-      if (response.status === 200) {
-        setproducts(response.data.products.rows);
-        setIsAddProduct(false);
-      }
-    } catch (error) {
-      toast(error.response.message);
-    }
-  };
+
   const createProductHandler = async (formData) => {
     try {
       const response = await apnaMart.post(`/admin/create-product`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${authContext.token}`,
+          Authorization: `Bearer ${userInfo.token}`,
         },
       });
       if (response.status === 201) {
@@ -60,6 +43,9 @@ const Products = () => {
   };
   return (
     <Main>
+      <div className="flex justify-center items-center mt-5">
+        <h1 className="text-indigo-600 font-bold text-4xl">Products</h1>
+      </div>
       <div className="w-full shadow-md my-6 ">
         <div className=" px-4 sm:px-10 py-4 md:py-7 rounded-t-lg bg-gray-200 ">
           <div className=" flex  items-center justify-between">
@@ -91,4 +77,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Product;

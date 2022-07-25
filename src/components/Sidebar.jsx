@@ -1,21 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { MenuIcon, XIcon, LogoutIcon } from "@heroicons/react/outline";
 import { UserCircleIcon } from "@heroicons/react/solid";
-//import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/outline";
-import AuthContext from "../store/authContext";
-import UserContext from "../store/userContext";
+import { logout } from "../store/actions/userActions";
 
 const Sidebar = () => {
-  const authContext = useContext(AuthContext);
-  const userContext = useContext(UserContext);
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userLogin);
   ///signout handler
   const SignoutHandler = () => {
-    try {
-      authContext.logout();
-    } catch (error) {
-      console.log(error.message);
-    }
+    dispatch(logout());
   };
   const [collapseShow, setCollapseShow] = useState("hidden");
 
@@ -81,7 +76,7 @@ const Sidebar = () => {
                 <p className="text-base leading-4 ">Dashboard</p>
               </Link>
               <Link
-                to="/dashboard"
+                to="/orders"
                 onClick={() => setCollapseShow("hidden")}
                 className="focus:outline-none flex jusitfy-start hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4 items-center space-x-6 w-full "
               >
@@ -110,46 +105,24 @@ const Sidebar = () => {
                 <p className="text-base leading-4  ">Categories</p>
               </Link>
               <Link
-                to="/user-list"
+                to="/users"
                 onClick={() => setCollapseShow("hidden")}
                 className="focus:outline-none flex jusitfy-start hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4  items-center w-full  space-x-6"
               >
                 <p className="text-base leading-4 ">Users</p>
               </Link>
             </div>
-            
-            
+
             <div className="flex flex-col justify-between items-center">
-              <div className="w-full px-4">
-                <hr className=" border-gray-100 w-full" />
-              </div>
-              <div className="mt-6 flex flex-col justify-start items-start  px-4 w-full space-y-3 pb-5 ">
-                <Link
-                  to="/"
-                  onClick={() => setCollapseShow("hidden")}
-                  className="focus:outline-none flex justify-start items-center space-x-6 hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded  py-3 pl-4  w-full "
-                >
-                  <p className="text-base leading-4  ">Account Settings</p>
-                </Link>
-              </div>
               <div className=" flex  bg-indigo-500 rounded-md shadow-md  justify-between space-x-2 items-center h-full py-4 md:px-3 px-4 w-full  ">
                 <div className="flex items-center">
-                  {userContext.profileImageUrl === "" ? (
-                    <img
-                      src={userContext.profileImageUrl}
-                      alt="avatar"
-                      className="mx-2 md:sr-only"
-                    />
-                  ) : (
-                    <UserCircleIcon className="w-10 h-10 mx-2 md:sr-only" />
-                  )}
-
+                  <UserCircleIcon className="w-10 h-10 mx-2 md:sr-only" />
                   <div className="flex flex-col justify-start items-start space-y-2">
                     <p className="cursor-pointer text-base leading-4 text-white">
-                      {userContext.name}
+                      {userInfo?.name}
                     </p>
                     <p className="cursor-pointer text-xs leading-3 text-gray-200">
-                      {userContext.email}
+                      {userInfo?.email}
                     </p>
                   </div>
                 </div>

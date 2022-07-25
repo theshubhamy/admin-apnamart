@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import apnaMart from "../api/apnaMart";
-import AuthContext from "../store/authContext";
+import { useSelector } from "react-redux";
 import Main from "../layout/Main";
 import AddBrand from "../components/brands/AddBrand";
 import ListBrands from "../components/brands/ListBrands";
 import { toast } from "react-toastify";
 const Brand = () => {
   const [isAddBrand, setIsAddBrand] = useState(false);
-  const authContext = useContext(AuthContext);
+  const { userInfo } = useSelector((state) => state.userLogin);
   const [brands, setBrands] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const startEditingHandler = () => {
@@ -25,7 +25,7 @@ const Brand = () => {
   const getBrands = async () => {
     try {
       const response = await apnaMart.get("/admin/get-all-brands", {
-        headers: { Authorization: `Bearer ${authContext.token}` },
+        headers: { Authorization: `Bearer ${userInfo.token}` },
       });
       if (response.status === 200) {
         setBrands(response.data.brands);
@@ -40,7 +40,7 @@ const Brand = () => {
       const response = await apnaMart.post(`/admin/create-brand`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${authContext.token}`,
+          Authorization: `Bearer ${userInfo.token}`,
         },
       });
       if (response.status === 201) {
@@ -54,6 +54,9 @@ const Brand = () => {
   };
   return (
     <Main>
+      <div className="flex justify-center items-center mt-5">
+        <h1 className="text-indigo-600 font-bold text-4xl">Brands</h1>
+      </div>
       <div className="w-full shadow-md my-6 ">
         <div className=" px-4 sm:px-10 py-4 md:py-7 rounded-t-lg bg-gray-200 ">
           <div className=" flex  items-center justify-between">

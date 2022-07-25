@@ -1,10 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import apnaMart from "../api/apnaMart";
-import UserContext from "../store/userContext";
 import { toast } from "react-toastify";
 const Signup = () => {
-  const userContext = useContext(UserContext);
   const navigate = useNavigate();
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
@@ -28,8 +26,7 @@ const Signup = () => {
       );
       if (response.status === 201) {
         toast(response.data.msg);
-        navigate("../auth/signup/otp-verification", { replace: true });
-        userContext.setEmail(email);
+        navigate(`../auth/signup/otp-verification/${email}`, { replace: true });
       } else {
         toast.warn(response.data.msg);
       }
@@ -69,7 +66,6 @@ const Signup = () => {
                   autoComplete="off"
                   value={name}
                   onChange={(e) => setname(e.target.value)}
-                  
                   className="rounded relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder=" Enter Name"
                 />

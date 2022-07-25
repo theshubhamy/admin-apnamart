@@ -3,45 +3,19 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
-import { AuthContextProvider } from "./store/authContext";
-import { UserContextProvider } from "./store/userContext";
-import { AppContextProvider } from "./store/appContext";
+import { Provider } from "react-redux";
+import store from "./store/redux";
 import ThemedSuspense from "./layout/ThemedSuspense";
-import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
-    <AuthContextProvider>
-      <UserContextProvider>
-        <AppContextProvider>
-          <Suspense fallback={<ThemedSuspense />}>
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </Suspense>
-        </AppContextProvider>
-      </UserContextProvider>
-    </AuthContextProvider>
+    <Suspense fallback={<ThemedSuspense />}>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </Suspense>
   </>
 );
-
-reportWebVitals();
-
-// //  <TextField
-//           className="search-desktop"
-//           size="small"
-//           onChange={(e) => {
-//             debounceSearch(e.target.value, debounceTimeout);
-//           }}
-//           InputProps={{
-//             endAdornment: (
-//               <InputAdornment position="end">
-//                 <Search color="primary" />
-//               </InputAdornment>
-//             ),
-//           }}
-//           placeholder="Search for items/categories"
-//           name="search"
-//         />
-//

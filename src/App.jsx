@@ -1,10 +1,9 @@
-import React, { useContext, lazy, useEffect } from "react";
+import React, { lazy, useEffect } from "react";
 import { Route, Routes, Navigate, useLocation } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//contextProvider
-import AuthContext from "./store/authContext";
+import ProtectedRoute from "./routes/ProtectedRoute";
 import Sidebar from "./components/Sidebar";
 //pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -12,6 +11,7 @@ const User = lazy(() => import("./pages/Users"));
 const Product = lazy(() => import("./pages/Product"));
 const Categories = lazy(() => import("./pages/Categories"));
 const Brand = lazy(() => import("./pages/Brand"));
+const Order = lazy(() => import("./pages/Order"));
 //auth
 const Signin = lazy(() => import("./auth/Signin"));
 
@@ -22,9 +22,8 @@ const SignupOtpVerification = lazy(() =>
 const NotFound = lazy(() => import("./pages/NotFound"));
 const App = () => {
   const { pathname } = useLocation();
-  const authContext = useContext(AuthContext);
-  const isSignedin = authContext.isLoggedIn;
-  // always scroll to top on route/path change
+  const { userInfo } = useSelector((state) => state.userLogin);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -41,84 +40,89 @@ const App = () => {
   // });
   return (
     <React.StrictMode>
-      {isSignedin && <Sidebar />}
+      {userInfo !== null && <Sidebar />}
       <Routes>
         <Route
           path="/"
           element={
-            isSignedin ? (
+            <ProtectedRoute>
               <Navigate to="/dashboard" replace="true" />
-            ) : (
-              <Navigate to="/auth/signin" replace="true" />
-            )
-          }
-        ></Route>
-        {isSignedin && (
-          <>
-            <Route
-              path="/dashboard"
-              element={
-                isSignedin ? <Dashboard /> : <Navigate to="/" replace="true" />
-              }
-            />
-            <Route
-              path="/user-list"
-              element={
-                isSignedin ? <User /> : <Navigate to="/" replace="true" />
-              }
-            />
-            <Route
-              path="/products"
-              element={
-                isSignedin ? <Product /> : <Navigate to="/" replace="true" />
-              }
-            />
-            <Route
-              path="/categories"
-              element={
-                isSignedin ? <Categories /> : <Navigate to="/" replace="true" />
-              }
-            />
-            <Route
-              path="/brands"
-              element={
-                isSignedin ? <Brand /> : <Navigate to="/" replace="true" />
-              }
-            />
-          </>
-        )}
-        <Route
-          path="*"
-          element={
-            isSignedin ? (
-              <NotFound />
-            ) : (
-              <Navigate to="/auth/signin" replace="true" />
-            )
+            </ProtectedRoute>
           }
         ></Route>
 
         <Route
-          path="/auth/signin"
+          path="/dashboard"
           element={
-            !isSignedin ? <Signin /> : <Navigate to="/" replace="true" />
+            <ProtectedRoute>
+              <Dashboard />{" "}
+            </ProtectedRoute>
           }
+        />
+        <Route
+          path="/users"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <User />{" "}
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <Product />{" "}
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/categories"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <Categories />{" "}
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <Order />{" "}
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/brands"
+          element={
+            <ProtectedRoute>
+              {" "}
+              <Brand />{" "}
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <ProtectedRoute>
+              <NotFound />
+            </ProtectedRoute>
+          }
+        ></Route>
+        <Route
+          path="/auth/signin"
+          element={userInfo == null && <Signin />}
         ></Route>
         <Route
           path="/auth/signup"
-          element={
-            !isSignedin ? <Signup /> : <Navigate to="/" replace="true" />
-          }
+          element={userInfo == null && <Signup />}
         ></Route>
         <Route
-          path="/auth/signup/otp-verification"
-          element={
-            !isSignedin ? (
-              <SignupOtpVerification />
-            ) : (
-              <Navigate to="/" replace="true" />
-            )
-          }
+          path="/auth/signup/otp-verification/:email"
+          element={userInfo == null && <SignupOtpVerification />}
         ></Route>
       </Routes>
 

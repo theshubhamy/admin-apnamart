@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
-import UserContext from "../store/userContext";
-//import AuthContext from "../store/authContext";
+import React from "react";
+import { useParams } from "react-router-dom";
+
 import OtpCard from "../components/card/OtpCard";
 import apnaMart from "../api/apnaMart";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 const SignupOtpVerification = () => {
-  const userContext = useContext(UserContext);
-  //   const authContext = useContext(AuthContext);
-  const email = userContext.email;
+  const { email } = useParams();
   let navigate = useNavigate();
   const signupOtpHandler = async (otp) => {
     const enteredOtp = parseInt(otp);
@@ -37,10 +35,7 @@ const SignupOtpVerification = () => {
   };
   return (
     <>
-      <OtpCard
-        email={userContext.email}
-        onOtpVerification={signupOtpHandler}
-      ></OtpCard>
+      <OtpCard email={email} onOtpVerification={signupOtpHandler}></OtpCard>
     </>
   );
 };

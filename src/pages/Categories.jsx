@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Main from "../layout/Main";
 import apnaMart from "../api/apnaMart";
-import AuthContext from "../store/authContext";
+import { useSelector } from "react-redux";
 import AddCategory from "../components/categories/AddCategory";
 import ListCategory from "../components/categories/ListCategory";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 const Categories = () => {
   const [isAddCategory, setIsAddCategory] = useState(false);
-  const authContext = useContext(AuthContext);
+  const { userInfo } = useSelector((state) => state.userLogin);
   const [Categories, setCategories] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const startEditingHandler = () => {
@@ -26,7 +26,7 @@ const Categories = () => {
   const getCategories = async () => {
     try {
       const response = await apnaMart.get("/admin/get-all-categories", {
-        headers: { Authorization: `Bearer ${authContext.token}` },
+        headers: { Authorization: `Bearer ${userInfo.token}` },
       });
       if (response.status === 200) {
         setCategories(response.data.categories);
@@ -41,7 +41,7 @@ const Categories = () => {
       const response = await apnaMart.post(`/admin/create-category`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${authContext.token}`,
+          Authorization: `Bearer ${userInfo.token}`,
         },
       });
       if (response.status === 201) {
@@ -55,6 +55,10 @@ const Categories = () => {
   };
   return (
     <Main>
+      <div className="flex justify-center items-center mt-5">
+        <h1 className="text-indigo-600 font-bold text-4xl">Categories</h1>
+      </div>
+
       <div className="w-full shadow-md my-6 ">
         <div className=" px-4 sm:px-10 py-4 md:py-7 rounded-t-lg bg-gray-200 ">
           <div className=" flex  items-center justify-between">
