@@ -36,6 +36,7 @@ const Dashboard = () => {
     }
     return () => {};
   }, [dispatch, userInfo]);
+  
 
   let totalAmount = orders?.reduce(
     (total, order) => total + order.totalAmount,

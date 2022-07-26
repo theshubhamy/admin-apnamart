@@ -93,7 +93,7 @@ const ListProduct = ({ data }) => {
                     </p>
                   </td>
                   <td className="px-4 py-4  capitalize whitespace-nowrap text-base font-medium">
-                    {person.brand.brandName}
+                    {person.brand.name}
                   </td>
                   <td className="px-4 py-4  capitalize whitespace-nowrap text-base font-medium">
                     {person.category}

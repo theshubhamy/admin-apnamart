@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getAllBrands,
+  getAllCategories,
+} from "../../store/actions/productAction";
 const AddProduct = (props) => {
+  const dispatch = useDispatch();
   const [name, setname] = useState("");
   const [description, setdescription] = useState("");
   const [coverImage, setcoverImage] = useState("");
@@ -12,6 +18,14 @@ const AddProduct = (props) => {
   const [highlights, setHighlights] = useState("");
   const [specifications, setSpecifications] = useState("");
   const [ratings, setRatings] = useState("");
+  const { categories } = useSelector((state) => state.allCategories);
+  const { brands } = useSelector((state) => state.allBrands);
+  useEffect(() => {
+    dispatch(getAllCategories());
+    dispatch(getAllBrands());
+    return () => {};
+  }, [dispatch]);
+
   const brandHandler = async (e) => {
     e.preventDefault();
     try {
@@ -79,12 +93,11 @@ const AddProduct = (props) => {
                   className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
                   <option value="">Select Category</option>
-                  <option value="Electronics">Electronics</option>
-                  <option value="Mobiles">Mobiles</option>
-                  <option value="Laptops">Laptops</option>
-                  <option value="Fashion">Fashion</option>
-                  <option value="Appliances">Appliances</option>
-                  <option value="Home">Home</option>
+                  {categories?.map((category) => (
+                    <option key={category._id} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="col-span-6 sm:col-span-3 lg:col-span-2">
@@ -94,15 +107,21 @@ const AddProduct = (props) => {
                 >
                   Brand
                 </label>
-                <input
-                  type="text"
+                <select
                   id="Brand"
                   name="Brand"
                   autoComplete="Brand"
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
                   className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
+                >
+                  <option value="">Select Brand</option>
+                  {brands?.map((brand) => (
+                    <option key={brand._id} value={brand.name}>
+                      {brand.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                 <label
@@ -242,7 +261,11 @@ const AddProduct = (props) => {
                 <div className="space-y-1 text-center">
                   {coverImage !== "" ? (
                     <div className=" my-4 md:max-h-80 md:max-w-5xl rounded-full">
-                      <img src={URL.createObjectURL(coverImage)} alt="logo"  className="w-full h-40"/>
+                      <img
+                        src={URL.createObjectURL(coverImage)}
+                        alt="logo"
+                        className="w-full h-40"
+                      />
                     </div>
                   ) : (
                     <svg
