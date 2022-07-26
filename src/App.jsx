@@ -1,5 +1,5 @@
 import React, { lazy, useEffect } from "react";
-import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -44,15 +44,6 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={
-            <ProtectedRoute>
-              <Navigate to="/dashboard" replace="true" />
-            </ProtectedRoute>
-          }
-        ></Route>
-
-        <Route
-          path="/dashboard"
           element={
             <ProtectedRoute>
               <Dashboard />{" "}

@@ -7,8 +7,6 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
-  USER_DETAILS_RESET,
-  USER_LIST_RESET,
   ALL_USERS_REQUEST,
   ALL_USERS_SUCCESS,
   ALL_USERS_FAIL,
@@ -37,8 +35,8 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: data.admin,
     });
-
     sessionStorage.setItem("userInfo", JSON.stringify(data.admin));
+    
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -52,9 +50,8 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   sessionStorage.clear();
+  localStorage.clear();
   dispatch({ type: USER_LOGOUT });
-  dispatch({ type: USER_DETAILS_RESET });
-  dispatch({ type: USER_LIST_RESET });
   document.location.href = "/";
 };
 

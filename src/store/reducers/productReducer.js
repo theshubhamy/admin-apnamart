@@ -14,6 +14,12 @@ import {
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_RESET,
   DELETE_PRODUCT_FAIL,
+  ALL_BRANDS_REQUEST,
+  ALL_BRANDS_SUCCESS,
+  ALL_BRANDS_FAIL,
+  ALL_CATEGORIES_REQUEST,
+  ALL_CATEGORIES_SUCCESS,
+  ALL_CATEGORIES_FAIL,
 } from "../constants";
 
 export const newProductReducer = (state = {}, action) => {
@@ -132,6 +138,57 @@ export const deleteProductReducer = (state = {}, action) => {
         loading: false,
         error: null,
         product: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export const allBrandsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ALL_BRANDS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case ALL_BRANDS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        brands: action.payload,
+      };
+    case ALL_BRANDS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+export const allCategoriesReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ALL_CATEGORIES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case ALL_CATEGORIES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        categories: action.payload,
+      };
+    case ALL_CATEGORIES_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;

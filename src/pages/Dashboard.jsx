@@ -3,19 +3,21 @@ import Main from "../layout/Main";
 // eslint-disable-next-line no-unused-vars
 import Chart from "chart.js/auto";
 import { Doughnut, Line, Pie, Bar } from "react-chartjs-2";
-import { getAllProducts } from "../store/actions/productAction";
+import {
+  getAllProducts,
+  getAllCategories,
+} from "../store/actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllOrders } from "../store/actions/orderAction";
-import { getAllUsers } from "../store/actions/userActions";
-import { categories } from "../utils/constants";
+import { getAllUsers, clearErrors } from "../store/actions/userActions";
+
 const Dashboard = () => {
   const dispatch = useDispatch();
-
+  const { userInfo } = useSelector((state) => state.userLogin);
   const { products } = useSelector((state) => state.allProducts);
   const { orders } = useSelector((state) => state.orders);
-
   const { users } = useSelector((state) => state.users);
-
+  const { categories } = useSelector((state) => state.allCategories);
   let outOfStock = 0;
 
   products?.forEach((item) => {
@@ -25,10 +27,15 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    dispatch(getAllProducts());
-    dispatch(getAllOrders());
-    dispatch(getAllUsers());
-  }, [dispatch]);
+    if (userInfo !== null) {
+      dispatch(getAllProducts());
+      dispatch(getAllOrders());
+      dispatch(getAllUsers());
+      dispatch(getAllCategories());
+      dispatch(clearErrors());
+    }
+    return () => {};
+  }, [dispatch, userInfo]);
 
   let totalAmount = orders?.reduce(
     (total, order) => total + order.totalAmount,
@@ -125,15 +132,15 @@ const Dashboard = () => {
   };
 
   const barState = {
-    labels: categories,
+    labels: categories?.map((item) => item.name),
     datasets: [
       {
         label: "Products",
         borderColor: "#9333ea",
         backgroundColor: "#6366f1",
         hoverBackgroundColor: "#6366f1",
-        data: categories.map(
-          (cat) => products?.filter((item) => item.category === cat).length
+        data: categories?.map(
+          (cat) => products?.filter((item) => item.category === cat.name).length
         ),
       },
     ],
@@ -145,7 +152,7 @@ const Dashboard = () => {
           <div className="flex flex-col bg-indigo-500 text-white gap-2 rounded-xl shadow  p-6">
             <h4 className="text-gray-100 font-medium">Total Sales Amount</h4>
             <h2 className="text-2xl font-bold">
-              ₹{totalAmount?.toLocaleString()}
+              ₹ {totalAmount?.toLocaleString()}
             </h2>
           </div>
           <div className="flex flex-col bg-yellow-500 text-white gap-2 rounded-xl shadow p-6">

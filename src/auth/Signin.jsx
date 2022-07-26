@@ -4,7 +4,7 @@ import { LockClosedIcon } from "@heroicons/react/solid";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { login } from "../store/actions/userActions";
+import { login, clearErrors } from "../store/actions/userActions";
 
 const Signin = () => {
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ const Signin = () => {
   useEffect(() => {
     if (error) {
       toast.error(error);
+      dispatch(clearErrors());
     }
     if (userInfo !== null) {
       navigate(redirectPath, { replace: true });

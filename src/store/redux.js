@@ -12,6 +12,8 @@ import {
   allProductsReducer,
   updateProductReducer,
   deleteProductReducer,
+  allBrandsReducer,
+  allCategoriesReducer,
 } from "./reducers/productReducer";
 const reducer = combineReducers({
   users: allUsersReducer,
@@ -22,6 +24,8 @@ const reducer = combineReducers({
   allProducts: allProductsReducer,
   updateProduct: updateProductReducer,
   deleteProduct: deleteProductReducer,
+  allBrands: allBrandsReducer,
+  allCategories: allCategoriesReducer,
 });
 let initialState = {
   userLogin: {
@@ -31,7 +35,6 @@ let initialState = {
   },
 };
 const middleware = [thunk];
-
 const store = createStore(
   reducer,
   initialState,

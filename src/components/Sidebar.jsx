@@ -69,7 +69,7 @@ const Sidebar = () => {
 
             <div className="xl:mt-6 flex flex-col justify-start items-start  px-2 w-full space-y-2 pb-5 ">
               <Link
-                to="/dashboard"
+                to="/"
                 onClick={() => setCollapseShow("hidden")}
                 className="focus:outline-none flex jusitfy-start hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4 items-center space-x-6 w-full "
               >
