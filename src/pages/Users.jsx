@@ -20,7 +20,7 @@ const Users = () => {
         <h1 className="text-indigo-600 font-bold text-4xl">Users</h1>
       </div>
 
-      {users.length > 0 && (
+      {users && (
         <div className="shadow overflow-x-auto  my-10 border-b border-gray-200 sm:rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-indigo-200 text-gray-900">
@@ -58,7 +58,7 @@ const Users = () => {
               </tr>
             </thead>
             <tbody className="bg-gray-100 text-gray-900 divide-y-2 divide-white">
-              {users.map((person) => (
+              {users?.map((person) => (
                 <tr key={uuidv4()}>
                   <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
                     {person.name}
@@ -70,10 +70,10 @@ const Users = () => {
                     {person.phone}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-base font-medium">
-                    {person.address.city ? (
+                    {person?.address ? (
                       <>
-                        <span>{person.address.city}</span>,
-                        <span> {person.address.zip}</span>
+                        <span>{person.address?.city}</span>,
+                        <span> {person.address?.zip}</span>
                       </>
                     ) : (
                       "N/A"

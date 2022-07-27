@@ -13,7 +13,7 @@ const ListBrands = ({ data }) => {
                   scope="col"
                   className="px-6 py-3 text-left text-lg font-semibold  capatalize tracking-wider"
                 >
-                  Brand Logo
+                  BrandLogo
                 </th>
                 <th
                   scope="col"
