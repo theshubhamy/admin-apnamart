@@ -172,7 +172,7 @@ const Dashboard = () => {
 
         <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-8 min-w-full  my-4">
           <div className="bg-white rounded-xl h-auto w-full shadow p-2">
-            <Line data={lineState} />
+            <Bar data={barState} />
           </div>
 
           <div className="bg-white rounded-xl shadow p-4 text-center">
@@ -185,7 +185,7 @@ const Dashboard = () => {
 
         <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-8 min-w-full my-4 ">
           <div className="bg-white rounded-xl h-auto w-full shadow p-2">
-            <Bar data={barState} />
+            <Line data={lineState} />
           </div>
 
           <div className="bg-white rounded-xl shadow p-4 text-center">
