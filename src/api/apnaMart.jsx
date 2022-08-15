@@ -1,5 +1,5 @@
 import Axios from "axios";
 
 export default Axios.create({
-  baseURL: "https://api.theshubham.dev",
+  baseURL: "https://apnamartapi.herokuapp.com",
 });
